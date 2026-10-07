@@ -1,0 +1,62 @@
+{
+    "version": 6,
+    "configurePresets": [
+        {
+            "name": "mingw",
+            "description": "MinGW-w64 compiler for Windows",
+            "generator": "Ninja Multi-Config",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "installDir": "${sourceDir}/install/${presetName}",
+            "cacheVariables": {
+                "CMAKE_CONFIGURATION_TYPES": "Release;Debug",
+                "CMAKE_CROSS_CONFIGS": "all",
+                "CMAKE_DEBUG_POSTFIX": "-debug",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "CMAKE_CXX_SCAN_FOR_MODULES": "OFF",
+                "CMAKE_SYSTEM_NAME": "Windows",
+                "CMAKE_CXX_COMPILER": "x86_64-w64-mingw32-g++",
+                "CMAKE_C_COMPILER": "x86_64-w64-mingw32-gcc"
+            },
+            "environment": {
+                "CXXFLAGS": "-Wall -Wextra -Wpedantic"
+            }
+        },
+        {
+            "name": "msvc",
+            "description": "MSVC compiler (native Windows build)",
+            "generator": "Visual Studio 17 2022",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "installDir": "${sourceDir}/install/${presetName}",
+            "cacheVariables": {
+                "CMAKE_CONFIGURATION_TYPES": "Release;Debug",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "mingw-release",
+            "displayName": "MinGW [Release]",
+            "configurePreset": "mingw",
+            "configuration": "Release"
+        },
+        {
+            "name": "mingw-debug",
+            "displayName": "MinGW [Debug]",
+            "configurePreset": "mingw",
+            "configuration": "Debug"
+        },
+        {
+            "name": "msvc-release",
+            "displayName": "MSVC [Release]",
+            "configurePreset": "msvc",
+            "configuration": "Release"
+        },
+        {
+            "name": "msvc-debug",
+            "displayName": "MSVC [Debug]",
+            "configurePreset": "msvc",
+            "configuration": "Debug"
+        }
+    ]
+}
